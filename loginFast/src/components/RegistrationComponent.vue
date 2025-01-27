@@ -47,90 +47,141 @@ const goToLogin = () => {
 </script>
 
 <template>
+  <div :class="[
+    'min-h-screen flex items-center justify-center p-4 transition-colors duration-300',
+    isDark ? 'bg-slate-900' : 'bg-gradient-to-br from-purple-100 to-indigo-100'
+  ]">
     <div :class="[
-        'min-h-screen transition-colors duration-300 flex items-center justify-center',
-        isDark ? 'bg-gray-900' : 'bg-gray-100'
+      'w-full max-w-md overflow-hidden rounded-3xl shadow-2xl transition-all duration-300',
+      isDark ? 'bg-slate-800' : 'bg-white'
     ]">
-        <div :class="[
-            'w-full max-w-md p-8 rounded-xl shadow-lg transition-all duration-300',
-            isDark ? 'bg-gray-800' : 'bg-white'
-        ]">
-            <!-- Título y Toggle Theme -->
-            <header class="text-center mb-8 relative">
-                <button @click="toggleTheme"
-                    class="absolute right-0 top-0 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-                    :class="isDark ? 'text-gray-300' : 'text-gray-700'">
-                    <span v-if="isDark">🌞</span>
-                    <span v-else>🌙</span>
-                </button>
-                <h1 :class="[
-                    'text-3xl font-bold mb-2',
-                    isDark ? 'text-gray-100' : 'text-gray-800'
-                ]">
-                    Register
-                </h1>
-            </header>
+      <div class="p-6">
+        <h2 :class="[
+          'text-2xl font-bold text-center mb-4',
+          isDark ? 'text-indigo-300' : 'text-purple-700'
+        ]">Create Account</h2>
+        
+        <form @submit.prevent="handleRegister" class="space-y-4">
+          <div class="space-y-1">
+            <label :for="name" :class="[
+              'text-xs font-medium',
+              isDark ? 'text-indigo-200' : 'text-purple-600'
+            ]">Name</label>
+            <input 
+              type="text" 
+              id="name" 
+              v-model="name" 
+              required 
+              :class="[
+                'w-full px-4 py-2 rounded-lg transition duration-300',
+                isDark ? 'bg-slate-700 text-white focus:bg-slate-600' : 'bg-purple-50 text-purple-900 focus:bg-purple-100',
+                'focus:outline-none focus:ring-2',
+                isDark ? 'focus:ring-indigo-400' : 'focus:ring-purple-400'
+              ]"
+              placeholder="Enter your name"
+            >
+          </div>
+          <div class="space-y-1">
+            <label :for="email" :class="[
+              'text-xs font-medium',
+              isDark ? 'text-indigo-200' : 'text-purple-600'
+            ]">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              v-model="email" 
+              required 
+              :class="[
+                'w-full px-4 py-2 rounded-lg transition duration-300',
+                isDark ? 'bg-slate-700 text-white focus:bg-slate-600' : 'bg-purple-50 text-purple-900 focus:bg-purple-100',
+                'focus:outline-none focus:ring-2',
+                isDark ? 'focus:ring-indigo-400' : 'focus:ring-purple-400'
+              ]"
+              placeholder="Enter your email"
+            >
+          </div>
+          <div class="space-y-1">
+            <label :for="password" :class="[
+              'text-xs font-medium',
+              isDark ? 'text-indigo-200' : 'text-purple-600'
+            ]">Password</label>
+            <input 
+              type="password" 
+              id="password" 
+              v-model="password" 
+              required 
+              :class="[
+                'w-full px-4 py-2 rounded-lg transition duration-300',
+                isDark ? 'bg-slate-700 text-white focus:bg-slate-600' : 'bg-purple-50 text-purple-900 focus:bg-purple-100',
+                'focus:outline-none focus:ring-2',
+                isDark ? 'focus:ring-indigo-400' : 'focus:ring-purple-400'
+              ]"
+              placeholder="Enter your password"
+            >
+          </div>
+          <div class="space-y-1">
+            <label :for="confirmPassword" :class="[
+              'text-xs font-medium',
+              isDark ? 'text-indigo-200' : 'text-purple-600'
+            ]">Confirm Password</label>
+            <input 
+              type="password" 
+              id="confirmPassword" 
+              v-model="confirmPassword" 
+              required 
+              :class="[
+                'w-full px-4 py-2 rounded-lg transition duration-300',
+                isDark ? 'bg-slate-700 text-white focus:bg-slate-600' : 'bg-purple-50 text-purple-900 focus:bg-purple-100',
+                'focus:outline-none focus:ring-2',
+                isDark ? 'focus:ring-indigo-400' : 'focus:ring-purple-400'
+              ]"
+              placeholder="Confirm your password"
+            >
+          </div>
+          <div>
+            <button 
+              type="submit" 
+              :class="[
+                'w-full py-2 px-4 rounded-lg font-medium text-white transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-50',
+                isDark ? 'bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 focus:ring-indigo-400' : 'bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 focus:ring-purple-400'
+              ]"
+            >
+              Register
+            </button>
+          </div>
+        </form>
 
-            <!-- Registration Form -->
-            <form @submit.prevent="handleRegister" class="space-y-4">
-                <div>
-                    <label :for="name" :class="[
-                        'block text-sm font-medium mb-2',
-                        isDark ? 'text-gray-300' : 'text-gray-700'
-                    ]">Name</label>
-                    <input type="text" id="name" v-model="name" required :class="[
-                        'w-full px-3 py-2 border rounded-md',
-                        isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-900 border-gray-300'
-                    ]">
-                </div>
-                <div>
-                    <label :for="email" :class="[
-                        'block text-sm font-medium mb-2',
-                        isDark ? 'text-gray-300' : 'text-gray-700'
-                    ]">Email</label>
-                    <input type="email" id="email" v-model="email" required :class="[
-                        'w-full px-3 py-2 border rounded-md',
-                        isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-900 border-gray-300'
-                    ]">
-                </div>
-                <div>
-                    <label :for="password" :class="[
-                        'block text-sm font-medium mb-2',
-                        isDark ? 'text-gray-300' : 'text-gray-700'
-                    ]">Password</label>
-                    <input type="password" id="password" v-model="password" required :class="[
-                        'w-full px-3 py-2 border rounded-md',
-                        isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-900 border-gray-300'
-                    ]">
-                </div>
-                <div>
-                    <label :for="confirmPassword" :class="[
-                        'block text-sm font-medium mb-2',
-                        isDark ? 'text-gray-300' : 'text-gray-700'
-                    ]">Confirm Password</label>
-                    <input type="password" id="confirmPassword" v-model="confirmPassword" required :class="[
-                        'w-full px-3 py-2 border rounded-md',
-                        isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-900 border-gray-300'
-                    ]">
-                </div>
-                <button type="submit"
-                    class="w-full py-2 px-4 rounded-md font-medium text-white bg-cyan-500 hover:bg-cyan-600 transition-colors duration-300">
-                    Register
-                </button>
-            </form>
-
-            <p :class="[
-                'mt-4 text-center text-sm',
-                isDark ? 'text-gray-400' : 'text-gray-600'
-            ]">
-                Already have an account?
-                <a @click="goToLogin" href="#" :class="[
-                    'font-medium cursor-pointer',
-                    isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-500'
-                ]">Login here</a>
-            </p>
+        <div class="mt-4 text-center">
+          <a @click="goToLogin" href="#" :class="[
+            'text-sm font-medium cursor-pointer transition-colors duration-300',
+            isDark ? 'text-indigo-400 hover:text-indigo-300' : 'text-purple-600 hover:text-purple-500'
+          ]">Already have an account? Sign in</a>
         </div>
+      </div>
+      
+      <div :class="[
+        'p-4 text-center',
+        isDark ? 'bg-slate-700' : 'bg-purple-50'
+      ]">
+        <button 
+          @click="toggleTheme"
+          :class="[
+            'inline-flex items-center justify-center p-2 rounded-full transition-colors duration-300',
+            isDark ? 'bg-slate-600 text-indigo-200 hover:bg-slate-500' : 'bg-white text-purple-700 hover:bg-purple-100'
+          ]"
+        >
+          <span v-if="isDark" class="sr-only">Switch to light mode</span>
+          <span v-else class="sr-only">Switch to dark mode</span>
+          <svg v-if="isDark" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg v-else class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+      </div>
     </div>
+  </div>
 </template>
 
 <style scoped>
